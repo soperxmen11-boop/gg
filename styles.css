@@ -81,7 +81,7 @@ body{margin:0;background:radial-gradient(1000px 500px at 10% 0%,#0a1b46,transpar
 .topbar .brand-left img,
 .topbar .brand-left svg {
   height: clamp(var(--logo-min),
-                calc(var(--hdr-h) * 0.8),
+                calc(var(--hdr-h) * 0.95),
                 var(--logo-max-abs));
   width: auto;
   max-height: clamp(var(--logo-min),
