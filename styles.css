@@ -45,3 +45,97 @@ body{margin:0;background:radial-gradient(1000px 500px at 10% 0%,#0a1b46,transpar
   background-size: 100% 100%,100% 100%,100% 100%,100% 100%, 160% 160%;
   animation: bgShift 24s ease-in-out infinite alternate;}
 @keyframes bgShift{from{background-position:0% 0%} to{background-position:100% 100%}}
+
+/* ===========================
+   KIDS PRO / Colorinka - Header Logo Module (FULL)
+   ضيف هاد البلوك فـآخر ملف CSS ديالك
+   =========================== */
+
+/* متغيّرات عامة + دعم safe-area */
+:root {
+  --hdr-h: min(64px, 12.5vh);              /* علوّ افتراضي للهيدر */
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-left: env(safe-area-inset-left, 0px);
+  --safe-right: env(safe-area-inset-right, 0px);
+  --logo-max: 80%;                         /* أقصى نسبة من علوّ الهيدر */
+  --logo-min: 28px;                        /* أصغر حجم معقول */
+  --logo-max-abs: 56px;                    /* أكبر حجم معقول */
+}
+
+/* تأمين الهيدر من تحت النوتش */
+.topbar {
+  padding-top: calc(var(--safe-top));
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* جهة اليسار فيها اللوجو */
+.topbar .brand-left {
+  display: flex;
+  align-items: center;
+  padding-inline: max(8px, var(--safe-left));
+}
+
+/* نخليو اللّوگو يتأقلم مع علو الهيدر بلا ما يضرب التولبار */
+.topbar .brand-left img,
+.topbar .brand-left svg {
+  height: clamp(var(--logo-min),
+                calc(var(--hdr-h) * 0.8),
+                var(--logo-max-abs));
+  width: auto;
+  max-height: clamp(var(--logo-min),
+                    calc(var(--hdr-h) * var(--logo-max) / 1),
+                    var(--logo-max-abs));
+  display: block;
+}
+
+/* لو اللوجو محطوط كخلفية فالعنصر */
+.topbar .brand-left .logo-bg {
+  --sz: clamp(var(--logo-min), calc(var(--hdr-h) * 0.8), var(--logo-max-abs));
+  inline-size: var(--sz);
+  block-size: var(--sz);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/* نحترمو تفضيل تقليل الحركة */
+@media (prefers-reduced-motion: reduce) {
+  .topbar .brand-left img,
+  .topbar .brand-left svg {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* موبايل صغير جداً */
+@media (max-width: 420px) {
+  :root {
+    --hdr-h: min(58px, 12vh);
+    --logo-max-abs: 52px;
+  }
+}
+
+/* موبايل Landscape: نقص شوية باش مايضربش عناصر التوب بار */
+@media (max-height: 420px) and (orientation: landscape) {
+  :root {
+    --hdr-h: min(52px, 10vh);
+    --logo-max-abs: 48px;
+  }
+}
+
+/* إذا عندك سطر أدوات على اليمين، خليه ما يتزاحمش */
+.topbar .toolbar,
+.topbar .controls {
+  margin-inline-start: auto;
+  padding-inline: max(8px, var(--safe-right));
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* لو كتستعمل class مختلف للهيدر، هذا فالرّيسِت */
+.header, .game-header, .header-bar {
+  --hdr-h: var(--hdr-h);
+}
